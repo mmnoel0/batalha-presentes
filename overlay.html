@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Batalha de Presentes — Lula x Flávio</title>
+<style>
+:root{--bg:#090b14;--panel:#111629;--muted:#9da8c6;--red:#ff315d;--blue:#39d7ff;--gold:#ffd66b}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent;color:#fff;font-family:Arial,Helvetica,sans-serif}
+body{display:flex;align-items:center;justify-content:center}
+#stage{position:relative;width:min(100vw,56.25vh);height:min(177.78vw,100vh);min-width:320px;min-height:568px;max-width:900px;max-height:1600px;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,#20244a 0%,#0b0e1c 48%,#05060b 100%);border:2px solid #262b49}
+#stage:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,#39d7ff0b 50%,transparent 65%);pointer-events:none}
+.grid{position:absolute;inset:0;background-image:linear-gradient(#3edfff0a 1px,transparent 1px),linear-gradient(90deg,#3edfff0a 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(to bottom,#000,transparent 85%)}
+.header{text-align:center;position:absolute;top:3.2%;left:5%;width:90%;z-index:2}
+.kicker{font-size:clamp(10px,1.4vw,17px);letter-spacing:.24em;color:#b5c2e8;font-weight:800}
+h1{margin:7px 0 5px;font-size:clamp(22px,3.7vw,38px);line-height:1.02;font-weight:1000;font-style:italic;letter-spacing:-.035em;text-shadow:0 0 20px #6c68ff88;white-space:normal}
+.sub{font-size:clamp(9px,1.1vw,13px);color:#8d9ab9;letter-spacing:.09em}
+.header{top:3%;left:6%;width:88%}
+.sub{font-size:clamp(9px,1.3vw,15px);color:#8d9ab9;letter-spacing:.13em}
+.versus{position:absolute;top:17.1%;left:50%;transform:translateX(-50%) skew(-8deg);z-index:5;background:linear-gradient(135deg,#fff,#b8c9ff);color:#101426;font-weight:1000;font-size:clamp(17px,3vw,30px);padding:7px 16px;border-radius:6px;box-shadow:0 0 25px #a4b9ff77}
+.players{position:absolute;top:21%;left:4%;width:92%;display:grid;grid-template-columns:1fr 1fr;gap:3.5%;height:39.5%;z-index:1}
+.player{position:relative;overflow:hidden;border-radius:15px;padding:8px;background:linear-gradient(180deg,#171b30,#0c1020);border:1px solid #ffffff26}
+.player.red{border-color:#ff315d99;box-shadow:inset 0 0 30px #ff315d12,0 0 20px #ff315d12}
+.player.blue{border-color:#39d7ff99;box-shadow:inset 0 0 30px #39d7ff12,0 0 20px #39d7ff12}
+.portrait{position:absolute;left:7%;top:4%;width:86%;height:53%;object-fit:cover;object-position:center 20%;border-radius:10px;filter:saturate(1.08);background:#20243b}
+.party-mark{position:absolute;top:5%;right:8%;z-index:4;width:34px;height:34px;border-radius:50%;background:#ffffffee;display:flex;align-items:center;justify-content:center;box-shadow:0 0 15px #fff5;overflow:hidden}
+.party-mark img{width:100%;height:100%;object-fit:contain}
+.flag-mark{position:absolute;top:5%;right:8%;z-index:4;width:38px;height:38px;border-radius:50%;background:#ffffffee;display:flex;align-items:center;justify-content:center;box-shadow:0 0 15px #39d7ff55;overflow:hidden}.flag-mark img{width:100%;height:100%;object-fit:contain}
+.player:after{top:39%;height:19%}
+.name{top:59%;font-size:clamp(15px,2.4vw,25px)}
+.side-label{top:66%;font-size:clamp(8px,1vw,12px);letter-spacing:.08em}
+.percent{top:70%;font-size:clamp(28px,4.8vw,48px);line-height:1; padding-bottom:2px}
+.track{top:88%;height:9px}
+.player:after{content:"";position:absolute;left:8%;right:8%;top:42%;height:20%;background:linear-gradient(transparent,#0d1122);pointer-events:none}
+.name{position:absolute;top:61%;left:5%;width:90%;text-align:center;font-size:clamp(16px,2.7vw,28px);font-weight:1000;letter-spacing:.04em;text-shadow:0 2px 10px #000}
+.side-label{position:absolute;top:68%;left:5%;width:90%;text-align:center;font-size:clamp(8px,1.2vw,13px);letter-spacing:.13em;color:#aeb8d3}
+.percent{position:absolute;top:70%;left:0;width:100%;text-align:center;font-size:clamp(28px,4.8vw,48px);line-height:1;padding-bottom:2px;font-weight:1000;font-style:italic}
+.red .percent{color:var(--red);text-shadow:0 0 22px #ff315d66}
+.blue .percent{color:var(--blue);text-shadow:0 0 22px #39d7ff66}
+.track{position:absolute;left:8%;width:84%;top:87%;height:10px;background:#252a40;border-radius:20px;overflow:hidden}
+.fill{height:100%;width:0%;border-radius:20px;transition:width .4s ease;position:relative}
+.red .fill{background:linear-gradient(90deg,#a90d3c,var(--red));box-shadow:0 0 15px #ff315d}
+.blue .fill{background:linear-gradient(90deg,#147ba8,var(--blue));box-shadow:0 0 15px #39d7ff}
+.center-stats{position:absolute;top:62%;left:5%;width:90%;text-align:center;z-index:2}
+.round{font-size:clamp(11px,1.6vw,17px);font-weight:900;letter-spacing:.2em;color:var(--gold)}
+.hint{margin-top:7px;color:#9da8c6;font-size:clamp(9px,1.2vw,13px)}
+.leaderboard{position:absolute;top:69%;left:7%;width:86%;height:17%;padding:12px 15px;border-radius:13px;background:linear-gradient(135deg,#171b30eF,#0c1020ef);border:1px solid #ffd66b55;box-shadow:0 0 24px #ffd66b10}
+.lb-title{display:flex;justify-content:space-between;align-items:center;font-size:clamp(11px,1.7vw,17px);font-weight:900;letter-spacing:.1em;color:var(--gold);margin-bottom:7px}
+.lb-title small{font-size:9px;color:#8c98b7;letter-spacing:.08em}
+.rank{display:grid;grid-template-columns:27px 1fr auto;gap:8px;align-items:center;height:25%;font-size:clamp(10px,1.5vw,15px);color:#e9edff}
+.medal{font-weight:1000;color:var(--gold)}
+.rank .coins{color:#aab8d8;font-size:.9em}
+.footer{position:absolute;bottom:2.2%;left:5%;width:90%;text-align:center;color:#6e7b9d;font-size:clamp(8px,1.1vw,12px);letter-spacing:.08em}
+#toast{position:absolute;left:7%;right:7%;top:6%;z-index:20;transform:translateY(-180%);opacity:0;transition:transform .35s,opacity .35s;padding:12px 15px;border:1px solid #fff8;border-radius:12px;background:#151a2cf5;text-align:center;box-shadow:0 0 30px #39d7ff44}
+#toast.show{transform:translateY(0);opacity:1}
+#toast strong{display:block;font-size:clamp(14px,2.4vw,24px);color:var(--gold);margin-bottom:4px}
+#toast span{font-size:clamp(11px,1.7vw,17px)}
+#winner{position:absolute;inset:0;z-index:30;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:#050712eF}
+#winner.show{display:flex;animation:winIn .3s ease}
+#winner .cup{font-size:clamp(55px,12vw,110px);filter:drop-shadow(0 0 25px #ffd66b88)}
+#winner h2{font-size:clamp(28px,6vw,60px);font-style:italic;margin:8px 0;color:var(--gold);text-shadow:0 0 25px #ffd66b66}
+#winner p{font-size:clamp(12px,2vw,20px);color:#e5eaff}
+#winner small{color:#a4b0d1;margin-top:18px}
+#confetti{position:absolute;inset:0;z-index:25;pointer-events:none;overflow:hidden}
+.conf{position:absolute;width:7px;height:14px;top:-20px;animation:fall 2.3s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(760deg);opacity:.1}}
+@keyframes winIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+#status{position:absolute;bottom:0;left:0;padding:4px 7px;font-size:9px;color:#9ba6c6;background:#070912b8;z-index:40}
+#demoControls{position:absolute;left:10px;top:10px;z-index:50;display:flex;gap:5px;flex-wrap:wrap;max-width:95%}
+button{font-size:11px;border:1px solid #626b91;border-radius:6px;background:#171d32;color:#fff;padding:6px 8px;cursor:pointer}
+button:hover{background:#293451}
+#settings{display:none;position:absolute;z-index:60;inset:4%;background:#0d1222;border:1px solid #66729d;border-radius:14px;padding:16px;overflow:auto}
+#settings.show{display:block}
+#settings h2{margin:0 0 12px}
+#settings label{display:block;font-size:12px;color:#b9c5e2;margin:10px 0 4px}
+#settings input{width:100%;padding:9px;border-radius:6px;border:1px solid #404a6a;background:#080c18;color:#fff}
+.settings-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#settings .note{font-size:11px;color:#9ca8c6;line-height:1.5}
+#settings button{margin-top:12px}
+@media(max-width:450px){.leaderboard{padding:8px 10px}.players{top:21%;height:39.5%}.center-stats{top:62%}.leaderboard{top:69%}.versus{top:17.1%}}
+</style>
+</head>
+<body>
+<div id="stage">
+ <div class="grid"></div>
+ <div id="demoControls">
+  <button onclick="demoGift('lula')">TESTE 🌹 Lula</button>
+  <button onclick="demoGift('flavio')">TESTE 💙 Flávio</button>
+  <button onclick="demoGift('big')">TESTE PRESENTE GRANDE</button>
+  <button onclick="resetRound()">ZERAR</button>
+  <button onclick="toggleSettings()">⚙ AJUSTES</button><button onclick="hideControls()">OCULTAR BOTÕES</button>
+ </div>
+ <div class="header"><div class="kicker">ARENA • LIVE BATTLE</div><h1>BATALHA DE PRESENTES</h1><div class="sub">QUEM CHEGA A 100% PRIMEIRO?</div></div>
+ <div class="versus">VS</div>
+ <div class="players">
+  <div class="player red"><img class="portrait" id="imgLula" alt="Foto de Lula" src="lula.png"><div class="party-mark" title="Estrela do PT"><img src="estrela-pt.png" alt="Estrela do PT"></div><div class="name">LULA</div><div class="side-label">⭐ PT • ROSA VERMELHA</div><div class="percent" id="pctLula">0%</div><div class="track"><div class="fill" id="barLula"></div></div></div>
+  <div class="player blue"><img class="portrait" id="imgFlavio" alt="Foto de Flávio Bolsonaro" src="flavio.png"><div class="flag-mark" title="Partido Liberal (PL)"><img src="pl.png" alt="Símbolo do Partido Liberal"></div><div class="name">FLÁVIO</div><div class="side-label">🇧🇷 PL • ROSA BRANCA</div><div class="percent" id="pctFlavio">0%</div><div class="track"><div class="fill" id="barFlavio"></div></div></div>
+ </div>
+ <div class="center-stats"><div class="round" id="roundNum">RODADA 1</div><div class="hint">Envie presentes para subir a barra do seu lado!</div></div>
+ <div class="leaderboard"><div class="lb-title"><span>🏆 TOP 3 APOIADORES</span><small>NA RODADA</small></div><div id="rankRows"></div></div>
+ <div class="footer">PRESENTES DA LIVE • PLACAR ILUSTRATIVO DA DISPUTA</div>
+ <div id="toast"><strong id="toastTitle">PRESENTE RECEBIDO!</strong><span id="toastBody">Obrigado por participar!</span></div>
+ <div id="confetti"></div>
+ <div id="winner"><div class="cup">🏆</div><h2 id="winnerTitle">VITÓRIA!</h2><p id="winnerBody"></p><small>Nova rodada em instantes…</small></div>
+ <div id="status">DEMO • use os botões de teste ou conecte o TikFinity</div>
+ <div id="settings">
+  <h2>⚙ Ajustes da disputa</h2>
+  <p class="note">Escreva o nome do presente exatamente como aparece no evento do TikFinity. Como um mesmo presente não pode contar para os dois lados ao mesmo tempo, use presentes diferentes.</p>
+  <div class="settings-row"><div><label>Presente que pontua para Lula</label><input id="giftLula" value="Rose" placeholder="Rose / Rosa"></div><div><label>Presente que pontua para Flávio</label><input id="giftFlavio" value="White Rose" placeholder="White Rose / Rosa Branca"></div></div>
+  <div class="settings-row"><div><label>Pontos por presente (Lula)</label><input id="pointsLula" type="number" min="1" value="1"></div><div><label>Pontos por presente (Flávio)</label><input id="pointsFlavio" type="number" min="1" value="1"></div></div>
+  <label>Meta para vencer (pontos)</label><input id="goal" type="number" min="5" value="100">
+  <label>Tempo de tela da comemoração (segundos)</label><input id="winSeconds" type="number" min="2" value="5">
+  <label>Foto de Lula (URL opcional)</label><input id="urlLula" value="lula.png">
+  <label>Foto de Flávio (URL opcional)</label><input id="urlFlavio" value="flavio.png">
+  <p class="note">A pontuação e o ranking são reiniciados a cada rodada. O ranking soma os pontos atribuídos pela sua configuração, não o dinheiro recebido nem o valor em reais.</p>
+  <button onclick="saveSettings()">SALVAR AJUSTES</button> <button onclick="toggleSettings()">FECHAR</button>
+ </div>
+</div>
+<script>
+(() => {
+ const $=id=>document.getElementById(id);
+ let score={lula:0,flavio:0}, round=1, leaderboard={}, locked=false, socket=null, reconnectTimer=null, toastTimer=null;
+ let config={giftLula:'Rose',giftFlavio:'White Rose',pointsLula:1,pointsFlavio:1,goal:100,winSeconds:5};
+ const normalize=s=>String(s||'').trim().toLowerCase();
+ function status(s){$('status').textContent=s}
+ function pct(side){return Math.min(100,Math.round(score[side]/config.goal*100))}
+ function render(){
+  $('pctLula').textContent=pct('lula')+'%'; $('barLula').style.width=pct('lula')+'%';
+  $('pctFlavio').textContent=pct('flavio')+'%'; $('barFlavio').style.width=pct('flavio')+'%';
+  $('roundNum').textContent='RODADA '+round;
+  const rows=Object.entries(leaderboard).sort((a,b)=>b[1].points-a[1].points).slice(0,3);
+  $('rankRows').innerHTML='';
+  for(let i=0;i<3;i++){
+   const row=rows[i], div=document.createElement('div'); div.className='rank';
+   div.innerHTML=`<span class="medal">${['🥇','🥈','🥉'][i]}</span><span>${row?escapeHtml(row[0]):'Aguardando apoiadores…'}</span><span class="coins">${row?row[1].points+' pts':''}</span>`;
+   $('rankRows').appendChild(div);
+  }
+ }
+ function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+ function sound(kind='gift'){
+  try{
+   const ctx=new (window.AudioContext||window.webkitAudioContext)(), now=ctx.currentTime;
+   const notes=kind==='win'?[523,659,784,1046]:kind==='big'?[440,660,880]:[660,880];
+   notes.forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type=kind==='win'?'triangle':'sine';o.frequency.value=f;o.connect(g);g.connect(ctx.destination);g.gain.setValueAtTime(.0001,now+i*.11);g.gain.exponentialRampToValueAtTime(kind==='win'?.13:.07,now+i*.11+.025);g.gain.exponentialRampToValueAtTime(.0001,now+i*.11+.20);o.start(now+i*.11);o.stop(now+i*.11+.22)});
+   setTimeout(()=>ctx.close(),1600)
+  }catch(e){}
+ }
+ function showToast(title,body,kind='gift'){
+  $('toastTitle').textContent=title;$('toastBody').textContent=body;$('toast').classList.add('show');sound(kind);
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3200)
+ }
+ function confetti(){
+  const c=$('confetti');c.innerHTML='';
+  for(let i=0;i<75;i++){const d=document.createElement('i');d.className='conf';d.style.left=Math.random()*100+'%';d.style.animationDelay=(Math.random()*.65)+'s';d.style.background=['#ff315d','#39d7ff','#ffd66b','#b17cff','#ffffff'][i%5];d.style.transform=`rotate(${Math.random()*180}deg)`;c.appendChild(d)}
+  setTimeout(()=>c.innerHTML='',3300)
+ }
+ function win(side){
+  if(locked)return;locked=true;
+  const name=side==='lula'?'LULA':'FLÁVIO BOLSONARO';
+  $('winnerTitle').textContent=name+' VENCEU!';
+  $('winnerBody').textContent='A torcida levou o lado '+name+' a 100%. Parabéns aos apoiadores!';
+  $('winner').classList.add('show');confetti();sound('win');
+  setTimeout(()=>{ $('winner').classList.remove('show');score={lula:0,flavio:0};leaderboard={};round++;locked=false;render();showToast('NOVA RODADA!','A disputa foi reiniciada. Quem vence agora?','big'); },Math.max(2,Number(config.winSeconds)||5)*1000)
+ }
+ function gift(side,user,points,giftName,count=1){
+  if(locked)return;
+  points=Math.max(1,Number(points)||1)*Math.max(1,Number(count)||1);
+  score[side]+=points;const n=user||'Apoiador anônimo';
+  if(!leaderboard[n])leaderboard[n]={points:0};leaderboard[n].points+=points;
+  render();
+  const label=side==='lula'?'LULA':'FLÁVIO';
+  showToast('🎁 PRESENTE RECEBIDO!',`${n} enviou ${count>1?count+'x ':''}${giftName||'presente'} para ${label} (+${points} pts)`,points>=10?'big':'gift');
+  if(score[side]>=config.goal)win(side)
+ }
+ function readGift(data){
+  const giftName=data.giftName||data.gift_name||data.name||data.gift?.name||'';
+  const user=data.nickname||data.uniqueId||data.unique_id||data.username||data.user?.nickname||data.user?.uniqueId||data.user?.unique_id||data.user?.username||data.user?.displayId||'Apoiador';
+  const count=Number(data.repeatCount||data.repeat_count||data.combo||1)||1;
+  const name=normalize(giftName);
+  // Presentes mapeados: aceitamos nomes em português e inglês porque o TikTok/TikFinity pode variar o idioma.
+  const giftMap = [
+   {side:'lula', points:1, names:['rose','rosa','red rose','rosa vermelha']},
+   {side:'flavio', points:1, names:['white rose','rosa branca']},
+   {side:'flavio', points:5, names:['fireworks','fogos de artificios','fogos de artifícios','firework']},
+   {side:'lula', points:5, names:['hand heart','hands making heart','maos fazendo coracao','mãos fazendo coração','heart hands','make a heart']},
+   {side:'lula', points:10, names:['doughnut','donut','rosquinha']},
+   {side:'flavio', points:10, names:['capybara','capivara']},
+   {side:'lula', points:10, names:['mini dino','minidino','dino','mini dinossauro']},
+   {side:'flavio', points:10, names:['slow motion','camera lenta','câmera lenta']}
+  ];
+  const mapped = giftMap.find(g=>g.names.some(n=>normalize(n)===name));
+  if(mapped){gift(mapped.side,user,mapped.points,giftName,count);return}
+  if(name && name===normalize(config.giftLula)){gift('lula',user,config.pointsLula,giftName,count);return}
+  if(name && name===normalize(config.giftFlavio)){gift('flavio',user,config.pointsFlavio,giftName,count);return}
+  // Presentes não mapeados não alteram o placar; apenas presentes grandes podem gerar alerta.
+
+  const coins=Number(data.diamondCount||data.diamond_count||data.coins||0)||0;
+  if(coins>=10)showToast('✨ PRESENTE ESPECIAL!',`${user} enviou ${giftName||'um presente'} (${coins} diamantes)`, 'big');
+ }
+ function connect(){
+  try{
+   socket=new WebSocket('ws://127.0.0.1:21213/');
+   socket.onopen=()=>status('TIKFINITY CONECTADO • aguardando presentes');
+   socket.onmessage=e=>{try{const msg=JSON.parse(e.data);if(msg.event==='gift')readGift(msg.data||{});else if(msg.event==='config')status('TIKFINITY CONECTADO • aguardando presentes')}catch(err){}};
+   socket.onerror=()=>{status('SEM CONEXÃO • abra o TikFinity Desktop no mesmo computador')};
+   socket.onclose=()=>{status('DESCONECTADO • tentando reconectar…');clearTimeout(reconnectTimer);reconnectTimer=setTimeout(connect,2500)};
+  }catch(e){status('MODO DEMO • abra o TikFinity Desktop para conectar')}
+ }
+ window.demoGift=side=>{
+  if(side==='big'){const who='Apoiador VIP';gift(Math.random()<.5?'lula':'flavio',who,10,'Presente especial',1);return}
+  gift(side,side==='lula'?'@torcida_vermelha':'@torcida_azul',1,side==='lula'?'Rose':'White Rose',1)
+ };
+ window.resetRound=()=>{score={lula:0,flavio:0};leaderboard={};locked=false;$('winner').classList.remove('show');round++;render();showToast('PLACAR ZERADO','Uma nova rodada começou!')};
+ window.toggleSettings=()=> $('settings').classList.toggle('show');
+ window.hideControls=()=>{ $('demoControls').style.display='none'; status('MODO LIVE • controles ocultos'); };
+ window.addEventListener('keydown',e=>{ if(e.ctrlKey && e.shiftKey && e.key.toLowerCase()==='d'){ $('demoControls').style.display=$('demoControls').style.display==='none'?'flex':'none'; } });
+ window.saveSettings=()=>{
+  config.giftLula=$('giftLula').value.trim()||'Rose';config.giftFlavio=$('giftFlavio').value.trim()||'White Rose';
+  config.pointsLula=Math.max(1,Number($('pointsLula').value)||1);config.pointsFlavio=Math.max(1,Number($('pointsFlavio').value)||1);
+  config.goal=Math.max(5,Number($('goal').value)||100);config.winSeconds=Math.max(2,Number($('winSeconds').value)||5);
+  $('imgLula').src=$('urlLula').value.trim();$('imgFlavio').src=$('urlFlavio').value.trim();
+  $('settings').classList.remove('show');render();showToast('AJUSTES SALVOS','As novas configurações já estão ativas.')
+ };
+ render();connect();
+})();
+</script>
+</body>
+</html>

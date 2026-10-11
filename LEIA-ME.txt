@@ -1,0 +1,74 @@
+BATALHA DE PRESENTES — TikTok LIVE (versão inicial)
+=====================================================
+
+O QUE VEM NESTA PASTA
+- overlay.html: tela do jogo, efeitos, ranking Top 3, sons gerados pelo navegador e modo de teste.
+- Este arquivo: instruções de instalação.
+
+IMPORTANTE
+Esta é uma primeira versão funcional para testar o visual e a lógica. Ela não envia presentes, não controla o TikTok e não garante monetização. Para contar presentes reais, precisa que o TikFinity Desktop esteja aberto e conectado à sua LIVE no mesmo computador, com a Event API disponível em ws://127.0.0.1:21213/.
+
+COMO TESTAR SEM ESTAR AO VIVO
+1. Extraia o ZIP para uma pasta fácil, por exemplo a Área de Trabalho.
+2. Abra overlay.html com Chrome ou Edge.
+3. Clique em “TESTE 🌹 Lula”, “TESTE 💙 Flávio” e “TESTE PRESENTE GRANDE”.
+4. Para testar uma vitória mais rápida, clique em “⚙ AJUSTES” e reduza “Meta para vencer” para 5.
+5. Clique em “SALVAR AJUSTES”. Ao alcançar a meta, aparece a comemoração e o placar reinicia automaticamente.
+6. O áudio do navegador pode exigir um clique inicial; os botões de teste fazem isso.
+7. Antes de transmitir, clique em “OCULTAR BOTÕES” para não exibir os controles de teste. Para reexibir, use Ctrl+Shift+D (com o overlay focado).
+
+COMO USAR COM TIKFINITY
+1. Instale o TikFinity Desktop pelo site oficial: https://tikfinity.com/
+2. Faça o setup, conecte à sua conta e mantenha o TikFinity Desktop aberto durante a LIVE.
+3. Confirme que a Event API está ativa. O endpoint local documentado pelo TikFinity é ws://localhost:21213/.
+4. Abra o overlay.html num Browser Source do OBS Studio (Fontes > + > Navegador/Browser Source > marcar arquivo local e escolher overlay.html). Se a sua versão do OBS permitir, habilite transparência.
+5. Ajuste a largura/altura da fonte conforme a composição da LIVE. A arte é vertical (9:16).
+6. Na primeira vez, observe o status no canto inferior esquerdo. Ele deve mudar para “TIKFINITY CONECTADO”.
+7. Envie presentes de teste somente se puder fazê-lo sem gastar dinheiro; não use sua própria conta para comprar presentes só para testar.
+
+CONFIGURAR QUAIS PRESENTES PONTUAM
+1. Na tela, clique em “⚙ AJUSTES”.
+2. Em “Presente que pontua para Lula”, digite o nome do presente exatamente como chega no evento do TikFinity (por exemplo, “Rose”).
+3. Em “Presente que pontua para Flávio”, escolha um presente DIFERENTE (por exemplo, “Heart Me”, se esse nome existir na lista da sua LIVE).
+4. Um mesmo presente não pode identificar dois lados diferentes. A rosa comum do TikTok é um único tipo de presente; a cor desenhada na tela não cria uma segunda rosa real no TikTok.
+5. Ajuste os pontos por presente e a meta. O padrão é 100 pontos para vencer.
+6. Clique em “SALVAR AJUSTES”.
+
+REGRAS DO PLACAR
+- A barra de cada lado mostra a pontuação daquele lado em relação à meta.
+- Quem alcançar a meta primeiro vence a rodada.
+- Depois da animação, o placar e o ranking são zerados e a rodada seguinte começa.
+- O Top 3 classifica os espectadores pela pontuação que receberam nesta rodada; não representa reais, moedas ou diamantes ganhos.
+- Presentes diferentes dos dois nomes configurados não aumentam o placar; presentes especiais de valor maior podem mostrar um alerta.
+
+FOTOS E CRÉDITOS
+As fotos são carregadas da Wikimedia Commons e exigem conexão com a internet. Caso não apareçam, abra Ajustes e cole outras URLs públicas de imagem.
+- Lula: “Luiz Inácio Lula da Silva 2023.jpg”, foto de Ricardo Stuckert/Palácio do Planalto, CC BY 2.0. Fonte: https://commons.wikimedia.org/wiki/File:Luiz_In%C3%A1cio_Lula_da_Silva_2023.jpg
+- Flávio Bolsonaro: “Flávio Bolsonaro 01.09.26.jpg”, foto de Carlos Moura/Agência Senado. Fonte: https://commons.wikimedia.org/wiki/File:Fl%C3%A1vio_Bolsonaro_01.09.26.jpg
+Confira as condições de atribuição/licença nas páginas originais se redistribuir o overlay publicamente.
+
+SOLUÇÃO DE PROBLEMAS
+- Se a tela ficar em “SEM CONEXÃO”: abra o TikFinity Desktop, faça setup e confirme que está conectado à LIVE. O overlay e o TikFinity precisam estar no mesmo computador.
+- Se o navegador bloquear o WebSocket local, tente abrir o HTML como arquivo local no Browser Source do OBS, em vez de numa aba normal do Chrome. As restrições de rede local variam conforme a versão do navegador.
+- Se a foto não aparecer, é um problema de acesso à imagem externa; tente outra URL em Ajustes.
+- Se o nome de um presente não pontuar, confirme a grafia exata do campo giftName nos eventos do TikFinity. A nomenclatura pode variar.
+- Os sons são sintetizados localmente pelo navegador, então não precisam de arquivos de áudio externos.
+
+CUSTO
+O overlay e os testes são gratuitos. TikFinity possui recursos gratuitos e pagos; esta versão usa sua Event API local, mas não garante que todos os recursos de conta necessários estejam disponíveis em qualquer plano. Teste antes de pagar por qualquer assinatura.
+
+Este é um projeto de comunidade/entretenimento, não uma integração oficial do TikTok. Mantenha a LIVE acompanhada e respeite as regras atuais da plataforma.
+
+
+PONTUAÇÃO PADRÃO DOS PRESENTES:
+- Rosa vermelha / Rose (Lula): +1 ponto
+- Rosa branca / White Rose (Flávio): +1 ponto
+- Fogos de artifício / Fireworks (Flávio): +5 pontos
+- Mãos fazendo coração / Hand Heart (Lula): +5 pontos
+- Rosquinha / Doughnut (Lula): +10 pontos
+- Capivara / Capybara (Flávio): +10 pontos
+- Mini Dino (Lula): +10 pontos
+- Câmera lenta / Slow Motion (Flávio): +10 pontos
+
+O overlay reconhece os nomes acima em português e inglês. O nome real que o TikFinity envia pode variar conforme idioma/versão do TikTok; teste na sua LIVE de teste e, se algum presente não pontuar, ajuste o nome no código ou me envie o nome exato exibido pelo TikFinity.
+O símbolo enviado pelo usuário para o Partido Liberal foi adicionado ao lado do Flávio. A porcentagem foi redimensionada para evitar corte.
